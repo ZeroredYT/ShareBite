@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShareBite - Login / Sign Up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="auth-page">
+    <div class="auth-container">
+      <!-- Left Banner Panel -->
+      <div class="auth-banner">
+        <div class="banner-content">
+          <a class="brand" href="#">
+            <span class="brand-mark">S</span>
+            <span>ShareBite</span>
+          </a>
+          <h1 class="banner-title">Reducing food waste, one meal at a time.</h1>
+          <p class="banner-subtitle">
+            Connecting providers, couriers, and recipients across campus
+            seamlessly.
+          </p>
+        </div>
+        <div class="banner-footer">
+          <span>&copy; ShareBite Campus Platform</span>
+        </div>
+      </div>
+
+      <!-- Right Form Panel -->
+      <div class="auth-card">
+        <!-- Tab Navigation -->
+        <div class="auth-tabs" role="tablist">
+          <button
+            type="button"
+            class="tab-btn active"
+            id="tabLogin"
+            role="tab"
+            aria-selected="true"
+            data-target="loginFormSection"
+          >
+            Log In
+          </button>
+          <button
+            type="button"
+            class="tab-btn"
+            id="tabSignup"
+            role="tab"
+            aria-selected="false"
+            data-target="signupFormSection"
+          >
+            Sign Up
+          </button>
+        </div>
+
+        <!-- Feedback Alert Message -->
+        <div id="authAlert" class="alert-message" hidden></div>
+
+        <!-- LOGIN FORM -->
+        <section id="loginFormSection" class="form-section active">
+          <div class="form-header">
+            <h2>Welcome back</h2>
+            <p>Enter your details to sign in to your account.</p>
+          </div>
+
+          <form id="loginForm" novalidate>
+            <div class="form-group">
+              <label for="loginEmail">Email Address</label>
+              <input
+                type="email"
+                id="loginEmail"
+                name="email"
+                class="form-input"
+                placeholder="e.g. user@sharebite.edu"
+                required
+                autocomplete="email"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <input
+                type="password"
+                id="loginPassword"
+                name="password"
+                class="form-input"
+                placeholder="••••••••"
+                required
+                autocomplete="current-password"
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="loginSubmitBtn">
+              Log In
+            </button>
+          </form>
+        </section>
+
+        <!-- SIGNUP FORM -->
+        <section id="signupFormSection" class="form-section">
+          <div class="form-header">
+            <h2>Create an account</h2>
+            <p>Join ShareBite to share or collect food on campus.</p>
+          </div>
+
+          <form id="signupForm" novalidate>
+            <div class="form-group">
+              <label for="signupName">Full Name</label>
+              <input
+                type="text"
+                id="signupName"
+                name="name"
+                class="form-input"
+                placeholder="e.g. Jane Doe"
+                required
+                autocomplete="name"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="signupEmail">Email Address</label>
+              <input
+                type="email"
+                id="signupEmail"
+                name="email"
+                class="form-input"
+                placeholder="e.g. jane@sharebite.edu"
+                required
+                autocomplete="email"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="signupRole">I want to join as</label>
+              <select id="signupRole" name="role" class="form-select" required>
+                <option value="recipient">Recipient (Claim food)</option>
+                <option value="courier">Green Courier (Deliver food)</option>
+                <option value="provider">Food Provider (Share food)</option>
+                <option value="admin">System Admin</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="signupPassword">Password</label>
+              <input
+                type="password"
+                id="signupPassword"
+                name="password"
+                class="form-input"
+                placeholder="At least 6 characters"
+                required
+                autocomplete="new-password"
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="signupSubmitBtn">
+              Create Account
+            </button>
+          </form>
+        </section>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

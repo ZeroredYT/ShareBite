@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShareBite - Food Recipient</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">ShareBite</div>
+        <div class="user-role">Food Recipient · Marcus Tan</div>
+      </div>
+
+      <nav class="nav-menu">
+        <a
+          href="javascript:void(0);"
+          class="nav-item active"
+          data-view="browse-view"
+          >Browse listings</a
+        >
+        <a href="javascript:void(0);" class="nav-item" data-view="claims-view"
+          >My claims <span class="badge" id="claims-count">0</span></a
+        >
+        <a href="javascript:void(0);" class="nav-item" data-view="impact-view"
+          >My impact</a
+        >
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="javascript:void(0);" id="logout-link" class="logout-btn"
+          >Log out</a
+        >
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- VIEW 1: BROWSE LISTINGS -->
+      <section id="browse-view" class="view-section active-view">
+        <header class="header">
+          <h1 class="page-title">Available food</h1>
+          <p class="subtitle">Claim surplus food before it is gone.</p>
+        </header>
+
+        <div class="filters-bar">
+          <div class="search-box">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search listings..."
+            />
+          </div>
+
+          <div class="select-box">
+            <select id="category-filter">
+              <option value="all">All categories</option>
+              <option value="cooked meals">Cooked meals</option>
+              <option value="bakery">Bakery</option>
+              <option value="fruit & veg">Fruit & veg</option>
+              <option value="packaged snacks">Packaged snacks</option>
+              <option value="beverages">Beverages</option>
+            </select>
+          </div>
+
+          <div class="select-box">
+            <select id="location-filter">
+              <option value="all">All locations</option>
+              <option value="cafeteria a">Cafeteria A (Block A)</option>
+              <option value="cafeteria b">Cafeteria B (Block C)</option>
+              <option value="library entrance">
+                Library entrance (Library)
+              </option>
+              <option value="block d lobby">Block D lobby (Block D)</option>
+              <option value="sports complex">
+                Sports complex (Sports Complex)
+              </option>
+              <option value="hostel lobby">
+                Hostel lobby (Hostel Block 2)
+              </option>
+            </select>
+          </div>
+
+          <div class="select-box">
+            <select id="time-filter">
+              <option value="all">Any time remaining</option>
+              <option value="under-1h">Under 1 hour</option>
+              <option value="under-3h">Under 3 hours</option>
+              <option value="more-3h">More than 3 hours</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="cards-grid" id="cards-grid">
+          <p class="subtitle">Loading listings...</p>
+        </div>
+      </section>
+
+      <!-- VIEW 2: MY CLAIMS -->
+      <section id="claims-view" class="view-section">
+        <header class="header">
+          <h1 class="page-title">My claims</h1>
+          <p class="subtitle">
+            Show your claim code at handoff. Track courier deliveries live.
+          </p>
+        </header>
+
+        <div class="cards-grid" id="claims-grid">
+          <p class="subtitle">Loading claims...</p>
+        </div>
+      </section>
+
+      <!-- VIEW 3: MY IMPACT -->
+      <section id="impact-view" class="view-section">
+        <header class="header">
+          <h1 class="page-title">My impact</h1>
+          <p class="subtitle">Food you have helped rescue from the bin.</p>
+        </header>
+
+        <div class="impact-grid">
+          <div class="impact-card">
+            <div class="impact-number" id="impact-pickups">0</div>
+            <div class="impact-label">pickups completed</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-number" id="impact-meals">0</div>
+            <div class="impact-label">meals rescued</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-number" id="impact-kg">0</div>
+            <div class="impact-label">kg of food rescued</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

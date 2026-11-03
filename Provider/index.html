@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>ShareBite | Food Provider</title>
+    <link rel="stylesheet" href="provider.css" defer />
+    <script src="provider.js" defer></script>
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <h1>ShareBite</h1>
+        <p>Food Provider</p>
+        <nav>
+          <button type="button" class="nav active" data-tab="listings">
+            My Listings</button
+          ><button type="button" class="nav" data-tab="impact">
+            Impact Stats
+          </button>
+        </nav>
+        <a href="javascript:void(0);" id="logoutLink">Log out</a>
+      </aside>
+      <main>
+        <header>
+          <div>
+            <h2 id="pageTitle">Your listings</h2>
+            <p id="greeting">Manage surplus food and reduce waste.</p>
+          </div>
+          <button id="addButton" type="button">+ Post a listing</button>
+        </header>
+        <p id="message" role="status" aria-live="polite"></p>
+        <p id="approval" hidden>
+          Admin approval is required before you can post food listings.
+        </p>
+        <section id="listingsView">
+          <div class="stats">
+            <article>
+              <span>Active listings</span><strong id="active">0</strong>
+            </article>
+            <article>
+              <span>Meals collected</span><strong id="meals">0</strong>
+            </article>
+            <article>
+              <span>Expired unclaimed</span><strong id="expired">0</strong>
+            </article>
+          </div>
+          <div id="cards" class="cards"></div>
+        </section>
+        <section id="impactView" hidden>
+          <div class="stats">
+            <article>
+              <span>Meals shared</span><strong id="impactMeals">0</strong>
+            </article>
+            <article>
+              <span>Food saved (kg)</span><strong id="weight">0</strong>
+            </article>
+          </div>
+          <p>Impact is calculated from collected listings.</p>
+        </section>
+      </main>
+    </div>
+    <dialog id="editor">
+      <form id="listingForm">
+        <div class="modalTop">
+          <h2 id="formHeading">Post a listing</h2>
+          <button type="button" id="closeDialog" class="secondary">
+            Close
+          </button>
+        </div>
+        <input type="hidden" id="listingId" /><label
+          >Food description<input
+            id="title"
+            maxlength="150"
+            required
+            placeholder="e.g. Rice and vegetables" /></label
+        ><label
+          >Portions<input
+            id="portions"
+            type="number"
+            min="1"
+            step="1"
+            required /></label
+        ><label
+          >Estimated food weight (kg)<input
+            id="kg"
+            type="number"
+            min="0.01"
+            max="9999.99"
+            step="0.01"
+            required /></label
+        ><label>Category<select id="category" required></select></label
+        ><label>Pickup location<select id="location" required></select></label
+        ><label
+          >Expiry / pickup deadline<input
+            id="expiry"
+            type="datetime-local"
+            required /></label
+        ><label class="check"
+          ><input type="checkbox" id="courier" /> Courier delivery
+          available</label
+        ><button type="submit">Save listing</button>
+      </form>
+    </dialog>
+    <dialog id="verifyDialog">
+      <form id="verifyForm">
+        <h2>Confirm self-pickup</h2>
+        <p>Enter the claim code shown by the recipient.</p>
+        <input type="hidden" id="verifyId" /><label
+          >Claim code<input
+            id="claimCode"
+            maxlength="10"
+            required
+            autocomplete="off"
+        /></label>
+        <div class="actions">
+          <button type="button" id="closeVerify" class="secondary">Close</button
+          ><button type="submit">Confirm collection</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>

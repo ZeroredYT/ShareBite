@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShareBite Campus - Green Courier</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/courier.css">
+</head>
+
+<body class="courier-page">
+<div class="app-shell">
+
+    <aside class="sidebar">
+        <a class="brand courier-brand" href="courier.html"
+           aria-label="ShareBite Courier home">
+            <span class="brand-mark">S</span>
+            <span>ShareBite</span>
+        </a>
+
+        <div class="role-tag">
+            Green Courier · <span id="sideUser"></span>
+        </div>
+
+        <nav>
+            <a href="#" data-view="queue" class="active">
+                Delivery queue
+            </a>
+            <a href="#" data-view="mine">
+                My deliveries
+            </a>
+        </nav>
+
+        <a href="#" class="logout" id="logoutLink">Log out</a>
+    </aside>
+
+    <main class="main">
+
+        <!-- Available deliveries -->
+        <section id="view-queue" class="courier-view">
+            <div class="courier-eyebrow">
+                <span class="live-dot"></span>
+                GREEN COURIER WORKSPACE
+            </div>
+
+            <div class="main-header">
+                <div>
+                    <h1>Deliveries needing a courier</h1>
+                    <p>
+                        Accept a delivery to help food reach someone
+                        who cannot collect it.
+                    </p>
+                </div>
+            </div>
+
+            <div class="courier-toolbar">
+                <div class="toolbar-copy">
+                    <strong>Find a nearby delivery</strong>
+                    <span>
+                        Choose a task you can collect and deliver
+                        before its deadline.
+                    </span>
+                </div>
+
+                <div class="filters courier-filters">
+                    <label class="filter-label" for="qLoc">
+                        Location
+                    </label>
+                    <select id="qLoc">
+                        <option value="">Any pickup / drop-off location</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="queueGrid" class="grid grid-cols"></div>
+
+            <div id="queueEmpty" class="empty" style="display:none">
+                <h3>No deliveries waiting</h3>
+                <p>
+                    Every courier request is already taken,
+                    or none match this filter.
+                </p>
+            </div>
+        </section>
+
+        <!-- Courier's assigned deliveries -->
+        <section id="view-mine" class="courier-view" style="display:none">
+            <div class="courier-eyebrow">
+                <span class="live-dot"></span>
+                YOUR DELIVERY ACTIVITY
+            </div>
+
+            <div class="main-header">
+                <div>
+                    <h1>My deliveries</h1>
+                    <p>
+                        Update each delivery as you pick up,
+                        travel and hand over the food.
+                    </p>
+                </div>
+            </div>
+
+            <div class="courier-summary">
+                <div class="summary-copy">
+                    <strong>Your impact, one delivery at a time.</strong>
+                    <span>
+                        Keep status updates accurate so recipients
+                        know when their food is arriving.
+                    </span>
+                </div>
+            </div>
+
+            <div class="stats-row courier-stats">
+                <div class="stat">
+                    <div class="num" id="sDone">0</div>
+                    <div class="label">deliveries completed</div>
+                </div>
+
+                <div class="stat">
+                    <div class="num" id="sProg">0</div>
+                    <div class="label">in progress</div>
+                </div>
+
+                <div class="stat">
+                    <div class="num" id="sKm">0</div>
+                    <div class="label">total km delivered</div>
+                </div>
+            </div>
+
+            <div id="mineGrid" class="grid grid-cols"></div>
+
+            <div id="mineEmpty" class="empty" style="display:none">
+                <h3>No deliveries yet</h3>
+                <p>
+                    Accept one from the delivery queue to see it here.
+                </p>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<!-- Complete delivery modal -->
+<div id="completeModal" class="courier-modal" hidden>
+    <div class="courier-modal-content">
+        <button type="button" id="closeModal"
+                class="modal-close" aria-label="Close">×</button>
+
+        <h2>Complete delivery</h2>
+        <p>Confirm the recipient's claim code and delivery details.</p>
+
+        <form id="completeDeliveryForm">
+            <label for="claimCode">Claim code</label>
+            <input id="claimCode" type="text"
+                   required maxlength="50" autocomplete="off">
+
+            <label for="distanceTravelled">Distance travelled (km)</label>
+            <input id="distanceTravelled" type="number"
+                   required min="0.1" step="0.1" value="1">
+
+            <label for="transportMode">Transport mode</label>
+            <select id="transportMode" required>
+                <option value="walking">Walking</option>
+                <option value="cycling">Cycling</option>
+                <option value="public_transport">Public transport</option>
+                <option value="other">Other</option>
+            </select>
+
+            <p id="modalError" role="alert" hidden></p>
+
+            <button type="submit">Confirm delivery</button>
+        </form>
+    </div>
+</div>
+
+<script src="js/courier.js"></script>
+</body>
+</html>

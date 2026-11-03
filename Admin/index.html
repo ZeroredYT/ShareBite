@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShareBite - System Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-top">
+        <div class="brand">ShareBite</div>
+        <div class="user-role-info">System Admin - System Admin</div>
+
+        <nav class="nav-menu">
+          <button class="nav-btn active" data-tab="overview">Overview</button>
+          <button class="nav-btn" data-tab="listings">All listings</button>
+          <button class="nav-btn" data-tab="users">Users</button>
+          <button class="nav-btn" data-tab="categories">
+            Categories / Locations
+          </button>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <button class="logout-btn" id="logoutBtn">Log out</button>
+      </div>
+    </div>
+
+    <!-- main content -->
+    <div class="main-content">
+      <!-- overview -->
+      <section id="tab-overview" class="tab-page active">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Campus overview</h1>
+            <p class="page-subtitle">System-wide impact and activity.</p>
+          </div>
+          <button class="btn btn-outline" id="btn-reset-data">
+            Reset demo data
+          </button>
+        </div>
+
+        <!-- alert banner -->
+        <div class="alert-banner" id="overview-alert">
+          <div id="alert-text">
+            <strong id="unapproved-users-count">0</strong> account(s) awaiting
+            approval
+            <a href="#" class="alert-link" onclick="switchTab('users')"
+              >Review users</a
+            >
+            <br />
+            <strong id="unreviewed-listings-count">0</strong> listing(s) not yet
+            reviewed
+            <a href="#" class="alert-link" onclick="switchTab('listings')"
+              >Review listings</a
+            >
+          </div>
+        </div>
+
+        <!-- Key Metrics Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="stat-meals">-</div>
+            <div class="stat-label">meals shared</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-food-kg">-</div>
+            <div class="stat-label">kg of food saved</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-total-listings">-</div>
+            <div class="stat-label">total listings</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-deliveries">-</div>
+            <div class="stat-label">courier deliveries done</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-active-couriers">-</div>
+            <div class="stat-label">active couriers</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-success-rate">-%</div>
+            <div class="stat-label">claim success rate</div>
+          </div>
+        </div>
+
+        <p class="footnote">
+          Claim success rate = collected listings out of collected plus expired
+          listings. Cancelled listings are not counted.
+        </p>
+      </section>
+
+      <!-- listings -->
+      <div id="tab-listings" class="tab-page">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">All listings</h1>
+            <p class="page-subtitle">
+              Review new listings and cancel anything that breaks the rules.
+            </p>
+          </div>
+        </div>
+
+        <div class="filter-bar">
+          <select id="listing-filter-select" class="form-select">
+            <option value="all">All listings</option>
+            <option value="unreviewed">Unreviewed listings only</option>
+            <option value="active">Active/Claimed listings</option>
+            <option value="expired">Expired listings</option>
+          </select>
+        </div>
+
+        <div class="card-table">
+          <table class="data-table">
+            <tr>
+              <th>Item</th>
+              <th>Provider</th>
+              <th>Portions / kg</th>
+              <th>Status</th>
+              <th>Review</th>
+              <th class="text-right">Actions</th>
+            </tr>
+            <tbody id="listings-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- users -->
+      <div id="tab-users" class="tab-page">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Users</h1>
+            <p class="page-subtitle">
+              Approve Provider and Courier accounts, deactivate accounts and
+              reassign roles.
+            </p>
+          </div>
+        </div>
+
+        <div class="filter-bar">
+          <select id="user-filter-select" class="form-select">
+            <option value="all">All users</option>
+            <option value="unverified">Unverified users</option>
+            <option value="providers">Providers</option>
+            <option value="couriers">Couriers</option>
+            <option value="recipients">Recipients</option>
+          </select>
+        </div>
+
+        <div class="card-table">
+          <table class="data-table">
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Approval</th>
+              <th>Account</th>
+              <th class="text-right">Actions</th>
+            </tr>
+            <tbody id="users-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- categories / locations -->
+      <section id="tab-categories" class="tab-page">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Categories and locations</h1>
+            <p class="page-subtitle">
+              Locations are used for both pickup and drop-off. An entry that is
+              still in use is hidden instead of deleted.
+            </p>
+          </div>
+        </div>
+
+        <div class="two-column-grid">
+          <!-- categories column -->
+          <div>
+            <h2 class="section-heading">Categories</h2>
+            <form id="add-category-form" class="add-inline-form">
+              <input
+                type="text"
+                id="cat-input-name"
+                class="form-input"
+                placeholder="New category name"
+                required
+              />
+              <button type="submit" class="btn btn-dark">Add</button>
+            </form>
+
+            <div class="card-table mt-4">
+              <table class="data-table">
+                <tr>
+                  <th>Name</th>
+                  <th>Status</th>
+                  <th class="text-right">Actions</th>
+                </tr>
+                <tbody id="categories-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- locations column -->
+          <div>
+            <h2 class="section-heading">Locations</h2>
+            <form id="add-location-form" class="add-inline-form">
+              <input
+                type="text"
+                id="loc-input-name"
+                class="form-input"
+                placeholder="Location name"
+                required
+              />
+              <input
+                type="text"
+                id="loc-input-building"
+                class="form-input"
+                placeholder="Building / block"
+                required
+              />
+              <button type="submit" class="btn btn-dark">Add</button>
+            </form>
+
+            <div class="card-table mt-4">
+              <table class="data-table">
+                <tr>
+                  <th>Name</th>
+                  <th>Building</th>
+                  <th>Status</th>
+                  <th class="text-right">Actions</th>
+                </tr>
+                <tbody id="locations-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
